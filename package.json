@@ -8,9 +8,14 @@
     "url": "git+https://github.com/danushka96/sns-action"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "ncc build src/index.js"
   },
-  "keywords": [],
+  "keywords": [
+    "github",
+    "action",
+    "AWS SNS",
+    "Simple Notification Service"
+  ],
   "author": "Danushka Herath",
   "license": "ISC",
   "dependencies": {
