@@ -1,0 +1,21 @@
+{
+  "name": "ust-sns-action",
+  "version": "1.0.0",
+  "description": "Github action to publish message to AWS SNS topic",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danushka96/sns-action"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Danushka Herath",
+  "license": "ISC",
+  "dependencies": {
+    "@actions/core": "^1.1.0",
+    "aws-sdk": "^2.630.0"
+  },
+  "devDependencies": {}
+}
