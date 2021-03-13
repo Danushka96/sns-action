@@ -25,7 +25,7 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          TOPIC_ARN: ${{ secrets.AWS_TOPIC_ARN }}
           SUBJECT: "My Repository"
           MESSAGE: "Build Success 1.0.011"
-          TOPIC_ARN: ${{ secrets.AWS_TOPIC_ARN }}
 ```
