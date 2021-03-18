@@ -19,19 +19,37 @@ function run() {
 
         core.debug(message);
 
-        let fallback =
-        `Ref: ${process.env.GITHUB_REF} \n` +
-        `Event: ${process.env.GITHUB_EVENT_NAME} \n` +
-        `Action URL : <https://github.com/${process.env.GITHUB_REPOSITORY}/commit/${process.env.GITHUB_SHA}/checks|${process.env.GITHUB_WORKFLOW}> \n` +
-        `Commit: <https://github.com/${process.env.GITHUB_REPOSITORY}/commit/${process.env.GITHUB_SHA}|commit_sha> \n` +
-        `Message: ${message} \n`;
+        let fields = [
+            {
+                'title': 'Ref',
+                'value': process.env.GITHUB_REF,
+                'short': true
+            },
+            {
+                'title': 'Event',
+                'value': process.env.GITHUB_EVENT_NAME,
+                'short': true
+            },
+            {
+                'title': 'Action URL',
+                'value': `<https://github.com/${process.env.GITHUB_REPOSITORY}/commit/${process.env.GITHUB_SHA}/checks|${process.env.GITHUB_WORKFLOW}>`,
+                'short': false
+            },
+            {
+                'title': 'Message',
+                'value': message,
+                'short': false
+            }
+        ];
 
         let slackMessage = {
-            fallback: fallback,
             color: 'good',
             author_name: process.env.GITHUB_ACTOR,
             author_link: `http://github.com/${process.env.GITHUB_ACTOR}`,
-            author_icon: `http://github.com/${process.env.GITHUB_ACTOR}.png?size=32`
+            author_icon: `http://github.com/${process.env.GITHUB_ACTOR}.png?size=32`,
+            footer: 'Ustocktrade',
+            footer_icon: 'https://avatars.githubusercontent.com/u/25242511?s=200&v=4',
+            fields
         }
 
         const params = {
