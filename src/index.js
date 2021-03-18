@@ -19,9 +19,16 @@ function run() {
 
         core.debug(message);
 
+        let slackMessage =
+        `Ref: ${process.env.GITHUB_REF} \n` +
+        `Event: ${process.env.GITHUB_EVENT_NAME} \n` +
+        `Action URL : <https://github.com/${process.env.GITHUB_REPOSITORY}/commit/${process.env.GITHUB_SHA}/checks|${process.env.GITHUB_WORKFLOW}> \n` +
+        `Commit: <https://github.com/ ${process.env.GITHUB_REPOSITORY}/commit/${process.env.GITHUB_SHA}|commit_sha> \n` +
+        `Message: ${message} \n`;
+
         const params = {
             Subject: subject,
-            Message: message,
+            Message: slackMessage,
             TopicArn: topic
         }
 
