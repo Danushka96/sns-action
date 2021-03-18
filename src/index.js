@@ -8,7 +8,6 @@ function run() {
         const AWS_SECRET_ACCESS_KEY = core.getInput("AWS_SECRET_ACCESS_KEY") || process.env.AWS_SECRET_ACCESS_KEY;
 
         const message = core.getInput("MESSAGE");
-        const subject = core.getInput("SUBJECT");
         const topic = core.getInput("TOPIC_ARN");
 
         AWS.config.update({
@@ -22,12 +21,12 @@ function run() {
         let fields = [
             {
                 "title": "Ref",
-                "value": "" + process.env.GITHUB_REF,
+                "value": process.env.GITHUB_REF,
                 "short": "true"
             },
             {
                 "title": "Event",
-                "value": "" + process.env.GITHUB_EVENT_NAME,
+                "value": process.env.GITHUB_EVENT_NAME,
                 "short": "true"
             },
             {
@@ -37,23 +36,26 @@ function run() {
             },
             {
                 "title": "Message",
-                "value": "" + message,
+                "value": message,
                 "short": "false"
             }
         ];
 
         let slackMessage = {
-            color: "good",
-            author_name: process.env.GITHUB_ACTOR,
-            author_link: "http://github.com/" + process.env.GITHUB_ACTOR,
-            author_icon: "http://github.com/" + process.env.GITHUB_ACTOR + ".png?size=32",
-            footer: "Ustocktrade",
-            footer_icon: "https://avatars.githubusercontent.com/u/25242511?s=200&v=4",
-            fields
+            attachments: [
+                {
+                    color: "good",
+                    author_name: process.env.GITHUB_ACTOR,
+                    author_link: "http://github.com/" + process.env.GITHUB_ACTOR,
+                    author_icon: "http://github.com/" + process.env.GITHUB_ACTOR + ".png?size=32",
+                    footer: "Ustocktrade",
+                    footer_icon: "https://avatars.githubusercontent.com/u/25242511?s=200&v=4",
+                    fields
+                }
+            ]
         }
 
         const params = {
-            Subject: subject,
             Message: JSON.stringify(slackMessage),
             TopicArn: topic
         }

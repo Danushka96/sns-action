@@ -17,9 +17,6 @@ inputs:
   AWS_SECRET_ACCESS_KEY:
     description: "A AWS SNS Secret. Can alternatively be stored in environment"
     required: true
-  SUBJECT:
-    description: "Subject of the SNS message"
-    required: false
 outputs:
   messageID:
     description: "The AWS SNS Message ID"
