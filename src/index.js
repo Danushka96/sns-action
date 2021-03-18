@@ -22,22 +22,22 @@ function run() {
             {
                 "title": "Ref",
                 "value": process.env.GITHUB_REF,
-                "short": "true"
+                "short": true
             },
             {
                 "title": "Event",
                 "value": process.env.GITHUB_EVENT_NAME,
-                "short": "true"
+                "short": true
             },
             {
                 "title": "Action URL",
-                "value": "<https://github.com/" + process.env.GITHUB_REPOSITORY + "/commit/" + process.env.GITHUB_SHA + "/checks",
-                "short": "false"
+                "value": "https://github.com/" + process.env.GITHUB_REPOSITORY + "/commit/" + process.env.GITHUB_SHA + "/checks",
+                "short": false
             },
             {
                 "title": "Message",
                 "value": message,
-                "short": "false"
+                "short": false
             }
         ];
 
