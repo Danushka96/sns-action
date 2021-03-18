@@ -6,9 +6,9 @@ function run() {
         const AWS_REGION = core.getInput("AWS_REGION") || process.env.AWS_REGION;
         const AWS_ACCESS_KEY_ID = core.getInput("AWS_ACCESS_KEY_ID") || process.env.AWS_ACCESS_KEY_ID;
         const AWS_SECRET_ACCESS_KEY = core.getInput("AWS_SECRET_ACCESS_KEY") || process.env.AWS_SECRET_ACCESS_KEY;
-
-        const message = core.getInput("MESSAGE");
-        const topic = core.getInput("TOPIC_ARN");
+        const TOPIC = core.getInput("TOPIC_ARN");
+        const SLACK_MESSAGE = core.getInput("SLACK_MESSAGE");
+        const SLACK_COLOR = core.getInput("SLACK_COLOR");
 
         AWS.config.update({
             region: AWS_REGION,
@@ -16,7 +16,7 @@ function run() {
             secretAccessKey: AWS_SECRET_ACCESS_KEY
         })
 
-        core.debug(message);
+        core.debug(SLACK_MESSAGE);
 
         let fields = [
             {
@@ -36,7 +36,7 @@ function run() {
             },
             {
                 "title": "Message",
-                "value": message,
+                "value": SLACK_MESSAGE,
                 "short": false
             }
         ];
@@ -44,7 +44,7 @@ function run() {
         let slackMessage = {
             attachments: [
                 {
-                    color: "good",
+                    color: SLACK_COLOR,
                     author_name: process.env.GITHUB_ACTOR,
                     author_link: "http://github.com/" + process.env.GITHUB_ACTOR,
                     author_icon: "http://github.com/" + process.env.GITHUB_ACTOR + ".png?size=32",
@@ -57,7 +57,7 @@ function run() {
 
         const params = {
             Message: JSON.stringify(slackMessage),
-            TopicArn: topic
+            TopicArn: TOPIC
         }
 
         const awsClient = new AWS.SNS({apiVersion: '2010-03-31'});
