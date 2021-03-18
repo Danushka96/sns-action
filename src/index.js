@@ -19,16 +19,24 @@ function run() {
 
         core.debug(message);
 
-        let slackMessage =
+        let fallback =
         `Ref: ${process.env.GITHUB_REF} \n` +
         `Event: ${process.env.GITHUB_EVENT_NAME} \n` +
         `Action URL : <https://github.com/${process.env.GITHUB_REPOSITORY}/commit/${process.env.GITHUB_SHA}/checks|${process.env.GITHUB_WORKFLOW}> \n` +
         `Commit: <https://github.com/${process.env.GITHUB_REPOSITORY}/commit/${process.env.GITHUB_SHA}|commit_sha> \n` +
         `Message: ${message} \n`;
 
+        let slackMessage = {
+            fallback: fallback,
+            color: 'good',
+            author_name: process.env.GITHUB_ACTOR,
+            author_link: `http://github.com/${process.env.GITHUB_ACTOR}`,
+            author_icon: `http://github.com/${process.env.GITHUB_ACTOR}.png?size=32`
+        }
+
         const params = {
             Subject: subject,
-            Message: slackMessage,
+            Message: JSON.stringify(slackMessage),
             TopicArn: topic
         }
 
