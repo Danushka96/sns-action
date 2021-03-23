@@ -2,9 +2,6 @@ name: "Publish message to SNS"
 author: "Danushka Herath"
 description: "Send a message to AWS SNS topic"
 inputs:
-  SLACK_MESSAGE:
-    description: "The message you want to send"
-    required: true
   TOPIC_ARN:
     description: "The topic arn you are sending"
     required: true
@@ -17,9 +14,12 @@ inputs:
   AWS_SECRET_ACCESS_KEY:
     description: "A AWS SNS Secret. Can alternatively be stored in environment"
     required: true
-  SLACK_COLOR:
-    description: "Color of Slack notification"
+  SUCCESS:
+    description: "Success or fail notify (ex : build success or failed)"
     required: false
+  MESSAGE:
+    description: "The message you want to send"
+    required: true
 outputs:
   messageID:
     description: "The AWS SNS Message ID"
